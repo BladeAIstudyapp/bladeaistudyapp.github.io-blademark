@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BladeMark™ GCSE English Literature</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f3f4f6;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --green: #10b981;
+      --green-dark: #059669;
+      --blue-soft: #dbeafe;
+      --green-soft: #dcfce7;
+      --purple-soft: #ede9fe;
+      --amber-soft: #fef3c7;
+      --red-soft: #fee2e2;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+
+    .wrap {
+      max-width: 1450px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .brand h1 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .brand p {
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 800px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button, select, textarea, input {
+      font-family: inherit;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dark);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 2.35fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .card h2 {
+      font-size: 1.02rem;
+      margin-bottom: 14px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    .field input,
+    .field select,
+    .field textarea,
+    textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.96rem;
+      background: white;
+      color: var(--text);
+    }
+
+    .field textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .helper {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    #essayInput {
+      min-height: 400px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    #result {
+      display: none;
+      grid-template-columns: 1fr 1.45fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .score-box {
+      text-align: center;
+      padding-top: 8px;
+    }
+
+    .level-badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      font-size: 0.82rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .score-main {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1;
+    }
+
+    .score-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.45;
+    }
+
+    .progress {
+      margin-top: 16px;
+      height: 14px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .progress > div {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #34d399, #10b981);
+      transition: width 0.5s ease;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      background: #fafafa;
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .stat .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .stat .value {
+      font-size: 1.08rem;
+      font-weight: 900;
+    }
+
+    .ao-section {
+      margin-top: 18px;
+    }
+
+    .ao-row {
+      margin-bottom: 12px;
+    }
+
+    .ao-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .ao-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #eef2f7;
+      overflow: hidden;
+    }
+
+    .ao-bar > div {
+      height: 100%;
+      width: 0%;
+      background: #10b981;
+      transition: width 0.5s ease;
+    }
+
+    .essay-render {
+      line-height: 1.8;
+      font-size: 0.98rem;
+      word-break: break-word;
+    }
+
+    .essay-render p {
+      margin-bottom: 14px;
+    }
+
+    .hl-quote {
+      background: var(--green-soft);
+      border-radius: 6px;
+      padding: 1px 4px;
+    }
+
+    .hl-analysis {
+      background: var(--blue-soft);
+      border-radius: 6px;
+      padding: 1px 4px;
+    }
+
+    .hl-method {
+      background: var(--purple-soft);
+      border-radius: 6px;
+      padding: 1px 4px;
+    }
+
+    .hl-context {
+      background: var(--amber-soft);
+      border-radius: 6px;
+      padding: 1px 4px;
+    }
+
+    .hl-whole {
+      background: var(--red-soft);
+      border-radius: 6px;
+      padding: 1px 4px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .legend span {
+      border-radius: 999px;
+      padding: 5px 8px;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: white;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    details summary {
+      list-style: none;
+      padding: 12px 14px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details summary::after {
+      content: "▾";
+      color: var(--muted);
+    }
+
+    details[open] summary::after {
+      content: "▴";
+    }
+
+    .detail-content {
+      border-top: 1px solid var(--border);
+      background: #fafafa;
+      padding: 14px;
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+
+    .bullets {
+      padding-left: 18px;
+    }
+
+    .bullets li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 1120px) {
+      .top-grid,
+      #result {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>BladeMark™ GCSE English Literature</h1>
+        <p>Examiner-style feedback built around official AQA assessment objectives.</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="resetEssay()">New Essay</button>
+        <button class="btn btn-secondary" onclick="downloadFeedback()">Download Feedback</button>
+        <button class="btn btn-primary" onclick="gradeEssay()">Grade Essay →</button>
+      </div>
+    </div>
+
+    <div class="top-grid">
+      <div class="card">
+        <h2>Marking Setup</h2>
+
+        <div class="field">
+          <label for="textType">Text type</label>
+          <select id="textType">
+            <option value="shakespeare">Shakespeare</option>
+            <option value="novel">19th-century novel</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="textTitle">Text studied</label>
+          <input id="textTitle" type="text" placeholder="e.g. Macbeth / A Christmas Carol / Jekyll and Hyde" />
+        </div>
+
+        <div class="field">
+          <label for="questionFocus">Question</label>
+          <textarea id="questionFocus" placeholder="e.g. Explore how Shakespeare presents Macbeth's ambition throughout the play."></textarea>
+        </div>
+
+        <div class="pill-row">
+          <div class="pill">AO1 12</div>
+          <div class="pill">AO2 12</div>
+          <div class="pill">AO3 6</div>
+          <div class="pill">AO4 4</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Essay</h2>
+        <textarea id="essayInput" placeholder="Paste your full essay here..."></textarea>
+        <div class="helper">Upload a full exam-style response for the most accurate feedback.</div>
+      </div>
+    </div>
+
+    <div id="result">
+      <div class="card">
+        <h2>Overall Mark</h2>
+
+        <div class="score-box">
+          <div class="level-badge" id="levelBadge">Level --</div>
+          <div class="score-main" id="markMain">--/30</div>
+          <div class="score-sub" id="markSub">Awaiting essay...</div>
+        </div>
+
+        <div class="progress">
+          <div id="barFill"></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="label">AO1</div><div class="value" id="statAO1">0/12</div></div>
+          <div class="stat"><div class="label">AO2</div><div class="value" id="statAO2">0/12</div></div>
+          <div class="stat"><div class="label">AO3</div><div class="value" id="statAO3">0/6</div></div>
+          <div class="stat"><div class="label">Overall level</div><div class="value" id="statLevel">Level --</div></div>
+          <div class="stat"><div class="label">Words</div><div class="value" id="statWords">0</div></div>
+          <div class="stat"><div class="label">Quotes</div><div class="value" id="statQuotes">0</div></div>
+        </div>
+
+        <div class="ao-section">
+          <div class="ao-row"><div class="ao-head"><span>AO1</span><span id="ao1Label">0/12</span></div><div class="ao-bar"><div id="ao1Bar"></div></div></div>
+          <div class="ao-row"><div class="ao-head"><span>AO2</span><span id="ao2Label">0/12</span></div><div class="ao-bar"><div id="ao2Bar"></div></div></div>
+          <div class="ao-row"><div class="ao-head"><span>AO3</span><span id="ao3Label">0/6</span></div><div class="ao-bar"><div id="ao3Bar"></div></div></div>
+          <div class="ao-row"><div class="ao-head"><span>AO4</span><span id="ao4Label">0/4</span></div><div class="ao-bar"><div id="ao4Bar"></div></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Essay Analysis View</h2>
+
+        <div class="legend">
+          <span class="hl-quote">Quotes</span>
+          <span class="hl-analysis">Analysis</span>
+          <span class="hl-method">Methods</span>
+          <span class="hl-context">Context</span>
+          <span class="hl-whole">Whole text</span>
+        </div>
+
+        <div class="essay-render" id="essayContent"></div>
+      </div>
+
+      <div class="card">
+        <h2>Examiner-Style Feedback</h2>
+
+        <details open>
+          <summary>Overview</summary>
+          <div class="detail-content" id="overviewText"></div>
+        </details>
+
+        <details open>
+          <summary>Strengths</summary>
+          <div class="detail-content"><ul class="bullets" id="strengthList"></ul></div>
+        </details>
+
+        <details open>
+          <summary>Targets</summary>
+          <div class="detail-content"><ul class="bullets" id="targetList"></ul></div>
+        </details>
+
+        <details>
+          <summary>AO Breakdown Commentary</summary>
+          <div class="detail-content" id="aoCommentary"></div>
+        </details>
+
+        <details>
+          <summary>Rewrite Advice</summary>
+          <div class="detail-content" id="rewriteAdvice"></div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function normalise(text) {
+      return text.replace(/\r/g, "").trim();
+    }
+
+    function splitParagraphs(text) {
+      return text.split(/\n\s*\n|\n+/).map(p => p.trim()).filter(Boolean);
+    }
+
+    function splitSentences(text) {
+      return text.split(/[.!?]+/).map(s => s.trim()).filter(Boolean);
+    }
+
+    function countMatches(text, regex) {
+      const match = text.match(regex);
+      return match ? match.length : 0;
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function extractQuestionKeywords(question) {
+      const stopwords = new Set([
+        "starting", "with", "this", "that", "the", "a", "an", "and", "or", "to", "of", "in", "on", "for", "as",
+        "how", "far", "explore", "write", "about", "presents", "present", "show", "shows", "character",
+        "characters", "play", "novel", "speech", "conversation", "extract", "whole", "text", "scene"
+      ]);
+
+      return question
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean)
+        .filter(word => !stopwords.has(word) && word.length > 2);
+    }
+
+    function countQuoteLikeEvidence(text) {
+      const quoted = countMatches(text, /"[^"]+"|'[^']+'/g);
+      const embedded = countMatches(text, /\b[a-z]+(?:'[a-z]+)+\b/gi);
+      return quoted + Math.min(embedded, 4);
+    }
+
+    function getSentenceStats(sentences) {
+      if (!sentences.length) return { avg: 0, varied: false };
+      const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+      const avg = lengths.reduce((a, b) => a + b, 0) / lengths.length;
+      const min = Math.min(...lengths);
+      const max = Math.max(...lengths);
+
+      return {
+        avg,
+        varied: max - min >= 8
+      };
+    }
+
+    function getLevel(mark30) {
+      if (mark30 >= 26) return 6;
+      if (mark30 >= 21) return 5;
+      if (mark30 >= 16) return 4;
+      if (mark30 >= 11) return 3;
+      if (mark30 >= 6) return 2;
+      if (mark30 >= 1) return 1;
+      return 0;
+    }
+
+    function levelDescription(level) {
+      const map = {
+        6: "Convincing, critical analysis and exploration",
+        5: "Thoughtful, developed consideration",
+        4: "Clear understanding",
+        3: "Explained, structured comments",
+        2: "Supported, relevant comments",
+        1: "Simple, explicit comments",
+        0: "Nothing worthy of credit"
+      };
+
+      return map[level] || "";
+    }
+
+    function collectHighlightRanges(text) {
+      const rules = [
+        {
+          cls: "hl-quote",
+          regex: /"[^"]+"|'[^']+'/g
+        },
+        {
+          cls: "hl-method",
+          regex: /\b(language|form|structure|metaphor|simile|imagery|contrast|juxtaposition|tone|symbolism|pathetic fallacy|alliteration|sibilance|oxymoron|rhetorical question|semantic field|motif|volta|enjambment|caesura|soliloquy|narrator|first person|dramatic irony)\b/gi
+        },
+        {
+          cls: "hl-whole",
+          regex: /\b(elsewhere|later in the play|later in the novel|earlier in the play|earlier in the novel|throughout the play|throughout the novel|as the play develops|as the novel develops|at the end of the play|at the end of the novel|by the end of the play|by the end of the novel|at the beginning|by the end)\b/gi
+        },
+        {
+          cls: "hl-context",
+          regex: /\b(context|Jacobean|Victorian|patriarchal|society|audience|religion|class|gender|poverty|social|historical|family expectations|power|morality|responsibility)\b/gi
+        },
+        {
+          cls: "hl-analysis",
+          regex: /\b(shows|suggests|implies|reveals|highlights|presents|illustrates|emphasises|emphasizes|conveys|demonstrates|reflects|reinforces|symbolises|symbolizes)\b/gi
+        }
+      ];
+
+      const ranges = [];
+
+      for (const rule of rules) {
+        let match;
+        rule.regex.lastIndex = 0;
+
+        while ((match = rule.regex.exec(text)) !== null) {
+          ranges.push({
+            start: match.index,
+            end: match.index + match[0].length,
+            cls: rule.cls
+          });
+        }
+      }
+
+      ranges.sort((a, b) => {
+        if (a.start !== b.start) return a.start - b.start;
+        return (b.end - b.start) - (a.end - a.start);
+      });
+
+      const clean = [];
+      let lastEnd = -1;
+
+      for (const range of ranges) {
+        if (range.start >= lastEnd) {
+          clean.push(range);
+          lastEnd = range.end;
+        }
+      }
+
+      return clean;
+    }
+
+    function highlightParagraph(text) {
+      const ranges = collectHighlightRanges(text);
+      let html = "";
+      let cursor = 0;
+
+      for (const range of ranges) {
+        html += escapeHtml(text.slice(cursor, range.start));
+        html += `<span class="${range.cls}">${escapeHtml(text.slice(range.start, range.end))}</span>`;
+        cursor = range.end;
+      }
+
+      html += escapeHtml(text.slice(cursor));
+      return html;
+    }
+
+    function renderEssay(text) {
+      return splitParagraphs(text)
+        .map(p => `<p>${highlightParagraph(p)}</p>`)
+        .join("");
+    }
+
+    function scoreAO1(data) {
+      let score = 0;
+
+      let taskRatio = 0;
+      if (data.questionKeywords.length > 0) {
+        let hits = 0;
+        for (const keyword of data.questionKeywords) {
+          if (data.essay.toLowerCase().includes(keyword)) hits++;
+        }
+        taskRatio = hits / data.questionKeywords.length;
+      } else {
+        taskRatio = 0.7;
+      }
+
+      if (taskRatio >= 0.8) score += 3;
+      else if (taskRatio >= 0.6) score += 2.5;
+      else if (taskRatio >= 0.4) score += 2;
+      else if (taskRatio >= 0.2) score += 1;
+      else score += 0.5;
+
+      if (data.quotes >= 5) score += 3;
+      else if (data.quotes >= 4) score += 2.5;
+      else if (data.quotes >= 3) score += 2;
+      else if (data.quotes >= 2) score += 1.5;
+      else if (data.quotes >= 1) score += 1;
+      else score += 0.2;
+
+      if (data.wholeTextHits >= 3) score += 2.2;
+      else if (data.wholeTextHits >= 2) score += 1.7;
+      else if (data.wholeTextHits >= 1) score += 1.1;
+      else score += 0.4;
+
+      if (data.paragraphs.length >= 4) score += 1;
+      else if (data.paragraphs.length >= 3) score += 0.6;
+
+      if (data.words.length >= 500) score += 0.8;
+      else if (data.words.length >= 300) score += 0.5;
+
+      if (data.thesisSignals >= 2) score += 1;
+      else if (data.thesisSignals >= 1) score += 0.5;
+
+      if (data.alternativeThinking >= 2) score += 1;
+      else if (data.alternativeThinking >= 1) score += 0.5;
+
+      return clamp(Math.round(score * 10) / 10, 0, 12);
+    }
+
+    function scoreAO2(data) {
+      let score = 0;
+
+      if (data.analysisVerbs >= 10) score += 3;
+      else if (data.analysisVerbs >= 7) score += 2.5;
+      else if (data.analysisVerbs >= 5) score += 2;
+      else if (data.analysisVerbs >= 3) score += 1.4;
+      else if (data.analysisVerbs >= 1) score += 0.8;
+
+      if (data.methodTerms >= 8) score += 3;
+      else if (data.methodTerms >= 6) score += 2.5;
+      else if (data.methodTerms >= 4) score += 2;
+      else if (data.methodTerms >= 2) score += 1.2;
+      else if (data.methodTerms >= 1) score += 0.7;
+
+      if (data.structureTerms >= 5) score += 2.2;
+      else if (data.structureTerms >= 3) score += 1.6;
+      else if (data.structureTerms >= 1) score += 0.8;
+
+      if (data.effectPhrases >= 5) score += 2.2;
+      else if (data.effectPhrases >= 3) score += 1.6;
+      else if (data.effectPhrases >= 1) score += 0.8;
+
+      if (data.subjectTerminology >= 6) score += 1.6;
+      else if (data.subjectTerminology >= 3) score += 1;
+      else if (data.subjectTerminology >= 1) score += 0.5;
+
+      return clamp(Math.round(score * 10) / 10, 0, 12);
+    }
+
+    function scoreAO3(data) {
+      let score = 0;
+
+      if (data.contextHits >= 6) score += 3;
+      else if (data.contextHits >= 4) score += 2.5;
+      else if (data.contextHits >= 2) score += 1.8;
+      else if (data.contextHits >= 1) score += 1;
+      else score += 0.2;
+
+      if (data.contextLinkedPhrases >= 4) score += 2;
+      else if (data.contextLinkedPhrases >= 2) score += 1.4;
+      else if (data.contextLinkedPhrases >= 1) score += 0.8;
+
+      if (data.wholeTextHits >= 2) score += 1;
+
+      return clamp(Math.round(score * 10) / 10, 0, 6);
+    }
+
+    function scoreAO4(data) {
+      let score = 0;
+
+      const punctuationHits = countMatches(data.text, /[,:;—()-]/g);
+      const capitalsAtSentenceStarts = countMatches(data.text, /(^|[.!?]\s+)[A-Z]/g);
+      const longWordHits = data.words.filter(w => w.replace(/[^a-zA-Z]/g, "").length >= 8).length;
+
+      if (data.sentenceStats.avg >= 10 && data.sentenceStats.avg <= 28) score += 1.3;
+      else if (data.sentenceStats.avg >= 7 && data.sentenceStats.avg <= 34) score += 0.9;
+      else score += 0.4;
+
+      if (data.sentenceStats.varied) score += 0.8;
+      else score += 0.4;
+
+      if (punctuationHits >= Math.max(6, data.sentences.length / 2)) score += 0.8;
+      else if (punctuationHits >= 3) score += 0.5;
+      else score += 0.2;
+
+      if (capitalsAtSentenceStarts >= Math.max(2, Math.floor(data.sentences.length / 2))) score += 0.5;
+      else score += 0.2;
+
+      if (longWordHits >= Math.max(12, data.words.length * 0.08)) score += 0.6;
+      else if (longWordHits >= 6) score += 0.4;
+      else score += 0.2;
+
+      return clamp(Math.round(score), 0, 4);
+    }
+
+    function gradeEssay() {
+      const text = normalise(document.getElementById("essayInput").value);
+      const question = normalise(document.getElementById("questionFocus").value);
+      const textType = document.getElementById("textType").value;
+      const textTitle = normalise(document.getElementById("textTitle").value);
+
+      if (!text) {
+        alert("Please paste your essay first.");
+        return;
+      }
+
+      const paragraphs = splitParagraphs(text);
+      const sentences = splitSentences(text);
+      const words = text.split(/\s+/).filter(Boolean);
+      const questionKeywords = extractQuestionKeywords(question);
+      const sentenceStats = getSentenceStats(sentences);
+      const quotes = countQuoteLikeEvidence(text);
+
+      const analysisVerbs = countMatches(text, /\b(shows|suggests|implies|reveals|highlights|presents|illustrates|emphasises|emphasizes|conveys|demonstrates|reflects|reinforces|symbolises|symbolizes)\b/gi);
+      const methodTerms = countMatches(text, /\b(language|form|structure|metaphor|simile|imagery|contrast|juxtaposition|tone|symbolism|pathetic fallacy|alliteration|sibilance|oxymoron|rhetorical question|semantic field|motif|volta|enjambment|caesura|soliloquy|narrator|first person|dramatic irony)\b/gi);
+      const structureTerms = countMatches(text, /\b(structure|beginning|ending|later|earlier|throughout|shift|turning point|contrast|cyclical|opening|closing)\b/gi);
+      const effectPhrases = countMatches(text, /\b(this suggests|this implies|this reveals|this highlights|this creates|this makes the audience|this makes the reader|this emphasises|this reinforces|this could show|this may suggest)\b/gi);
+      const subjectTerminology = countMatches(text, /\b(metaphor|simile|imagery|juxtaposition|contrast|tone|symbolism|pathetic fallacy|alliteration|sibilance|soliloquy|dramatic irony|narrator|semantic field|motif|enjambment|caesura)\b/gi);
+
+      const contextHits = countMatches(text, /\b(Jacobean|Victorian|society|social|religion|class|poverty|wealth|gender|power|status|audience|context|patriarchal|family expectations|morality|responsibility|scientific|gothic|Christian|marriage)\b/gi);
+      const contextLinkedPhrases = countMatches(text, /\b(this reflects|this suggests that in|for a Jacobean audience|for a Victorian audience|in this society|at the time|this would have been seen as|Shakespeare may be criticising|Dickens may be showing|Stevenson may be warning)\b/gi);
+
+      const thesisSignals = countMatches(text, /\b(overall|ultimately|throughout|therefore|arguably|perhaps|Shakespeare presents|Dickens presents|Stevenson presents|Austen presents|Shelley presents|Brontë presents|Conan Doyle presents)\b/gi);
+      const alternativeThinking = countMatches(text, /\b(perhaps|arguably|alternatively|on the other hand|however|although|yet)\b/gi);
+      const wholeTextHits = countMatches(text, /\b(elsewhere|later in the play|later in the novel|earlier in the play|earlier in the novel|throughout the play|throughout the novel|as the play develops|as the novel develops|by the end of the play|by the end of the novel|at the beginning|by the end)\b/gi);
+
+      const ao1Mark = scoreAO1({
+        essay: text,
+        paragraphs,
+        words,
+        quotes,
+        questionKeywords,
+        wholeTextHits,
+        thesisSignals,
+        alternativeThinking
+      });
+
+      const ao2Mark = scoreAO2({
+        analysisVerbs,
+        methodTerms,
+        structureTerms,
+        effectPhrases,
+        subjectTerminology
+      });
+
+      const ao3Mark = scoreAO3({
+        contextHits,
+        contextLinkedPhrases,
+        wholeTextHits
+      });
+
+      const ao4Mark = scoreAO4({
+        text,
+        words,
+        sentences,
+        sentenceStats
+      });
+
+      const mark30 = Math.round(ao1Mark + ao2Mark + ao3Mark);
+      const level = getLevel(mark30);
+
+      const strengths = [];
+      const targets = [];
+
+      if (ao1Mark >= 9) strengths.push("The response stays closely connected to the task and uses textual support with control.");
+      else if (ao1Mark >= 6) strengths.push("There is a relevant response to the task with some useful textual references.");
+      else targets.push("Answer the exact question more directly and use more precise quotations.");
+
+      if (ao2Mark >= 9) strengths.push("Method analysis is a clear strength, with repeated attention to language, structure or form and their effects.");
+      else if (ao2Mark >= 6) strengths.push("There is some clear explanation of the writer's methods.");
+      else targets.push("Move beyond spotting techniques by explaining what the writer's methods make the reader think or feel.");
+
+      if (ao3Mark >= 4.5) strengths.push("Context is linked effectively to the text and argument.");
+      else if (ao3Mark >= 3) strengths.push("There is some contextual awareness.");
+      else targets.push("Link context directly to the writer's ideas instead of naming it separately.");
+
+      if (ao4Mark >= 4) strengths.push("Written expression is controlled and generally secure.");
+      else if (ao4Mark >= 2) strengths.push("There is a fair level of clarity in written expression.");
+      else targets.push("Improve sentence control, punctuation and vocabulary precision.");
+
+      if (quotes >= 4) strengths.push("Quotation use is frequent enough to support interpretation.");
+      else targets.push("Use more short, precise quotations instead of broad summary.");
+
+      if (wholeTextHits >= 2) strengths.push("The response moves across the wider text rather than staying fixed on one moment.");
+      else targets.push("Add more whole-text coverage by referring to moments elsewhere in the play or novel.");
+
+      if (effectPhrases < 3) targets.push("After each quotation, add an effect sentence such as 'This suggests...' or 'This makes the audience...'.");
+
+      if (strengths.length === 0) strengths.push("There is at least a basic attempt to respond to the task.");
+      if (targets.length === 0) targets.push("Push the response further with more conceptual thinking and tighter analysis.");
+
+      let overview = "";
+      if (level === 6) {
+        overview = "This is operating around Level 6. The response is convincing and critical in places, with a strong grasp of task focus, textual support and analysis of methods. To stay securely in the top band, keep the argument conceptual and make every paragraph purposeful.";
+      } else if (level === 5) {
+        overview = "This sits around Level 5. The essay is thoughtful and developed, with a clear sense of argument and some detailed method analysis. To push into Level 6, make the response more exploratory and conceptual rather than simply detailed.";
+      } else if (level === 4) {
+        overview = "This is around Level 4. The response shows clear understanding and relevant explanation, but it needs more depth, precision and sophistication to move higher.";
+      } else if (level === 3) {
+        overview = "This is around Level 3. The essay has structured and explained comments, but much of it still needs fuller development and more method-based analysis.";
+      } else if (level === 2) {
+        overview = "This is around Level 2. The response is relevant in places, but it is still quite supported and simple rather than fully explained.";
+      } else {
+        overview = "This is operating at a basic level. Focus first on answering the question directly, using quotations and explaining methods.";
+      }
+
+      const ao1Comment = ao1Mark >= 9
+        ? "AO1 is strong: the task is addressed clearly, references are frequent, and the response has a developed line of argument."
+        : ao1Mark >= 6
+        ? "AO1 is secure but not top band: the essay is relevant, though references and task coverage could be more precise."
+        : "AO1 is limited at the moment: the response needs tighter focus on the question and stronger textual support.";
+
+      const ao2Comment = ao2Mark >= 9
+        ? "AO2 is strong: there is detailed attention to methods and their effects, with subject terminology used appropriately."
+        : ao2Mark >= 6
+        ? "AO2 is clear in places, but more fine-grained analysis is needed to move up the bands."
+        : "AO2 needs development: zoom in on words, identify methods and explain their effects more closely.";
+
+      const ao3Comment = ao3Mark >= 4.5
+        ? "AO3 is thoughtfully handled, with context linked to the argument rather than bolted on."
+        : ao3Mark >= 3
+        ? "AO3 is present, but context needs to be linked more specifically to writer, text and task."
+        : "AO3 is limited: context is either missing or too detached from the main argument.";
+
+      const ao4Comment = ao4Mark >= 4
+        ? "AO4 is strong, with controlled written communication."
+        : ao4Mark >= 2
+        ? "AO4 is adequate overall, though expression could be more fluent and precise."
+        : "AO4 needs improvement through sentence control, punctuation and vocabulary precision.";
+
+      const rewriteAdvice =
+        "Rebuild each main paragraph using this order: point linked to the question → short quotation → method → effect → link to writer's purpose or context → connection to the wider text.";
+
+      document.getElementById("levelBadge").textContent = `Level ${level} — ${levelDescription(level)}`;
+      document.getElementById("markMain").textContent = `${mark30}/30`;
+      document.getElementById("markSub").textContent =
+        `Estimated GCSE Literature mark • ${textType === "shakespeare" ? "Shakespeare" : "19th-century novel"}${textTitle ? " • " + textTitle : ""}`;
+
+      document.getElementById("barFill").style.width = `${(mark30 / 30) * 100}%`;
+
+      document.getElementById("statAO1").textContent = `${ao1Mark}/12`;
+      document.getElementById("statAO2").textContent = `${ao2Mark}/12`;
+      document.getElementById("statAO3").textContent = `${ao3Mark}/6`;
+      document.getElementById("statLevel").textContent = `Level ${level}`;
+      document.getElementById("statWords").textContent = words.length;
+      document.getElementById("statQuotes").textContent = quotes;
+
+      document.getElementById("ao1Label").textContent = `${ao1Mark}/12`;
+      document.getElementById("ao2Label").textContent = `${ao2Mark}/12`;
+      document.getElementById("ao3Label").textContent = `${ao3Mark}/6`;
+      document.getElementById("ao4Label").textContent = `${ao4Mark}/4`;
+
+      document.getElementById("ao1Bar").style.width = `${(ao1Mark / 12) * 100}%`;
+      document.getElementById("ao2Bar").style.width = `${(ao2Mark / 12) * 100}%`;
+      document.getElementById("ao3Bar").style.width = `${(ao3Mark / 6) * 100}%`;
+      document.getElementById("ao4Bar").style.width = `${(ao4Mark / 4) * 100}%`;
+
+      document.getElementById("essayContent").innerHTML = renderEssay(text);
+      document.getElementById("overviewText").textContent = overview;
+
+      document.getElementById("aoCommentary").innerHTML = `
+        <strong>AO1:</strong> ${ao1Comment}<br><br>
+        <strong>AO2:</strong> ${ao2Comment}<br><br>
+        <strong>AO3:</strong> ${ao3Comment}<br><br>
+        <strong>AO4:</strong> ${ao4Comment}
+      `;
+
+      document.getElementById("rewriteAdvice").textContent = rewriteAdvice;
+      document.getElementById("strengthList").innerHTML = strengths.map(s => `<li>${escapeHtml(s)}</li>`).join("");
+      document.getElementById("targetList").innerHTML = targets.map(t => `<li>${escapeHtml(t)}</li>`).join("");
+
+      document.getElementById("result").style.display = "grid";
+
+      window.lastReport = {
+        textTitle,
+        textType,
+        question,
+        mark30,
+        ao1Mark,
+        ao2Mark,
+        ao3Mark,
+        ao4Mark,
+        level,
+        overview,
+        strengths,
+        targets,
+        rewriteAdvice
+      };
+    }
+
+    function resetEssay() {
+      document.getElementById("essayInput").value = "";
+      document.getElementById("result").style.display = "none";
+      window.lastReport = null;
+    }
+
+    function downloadFeedback() {
+      if (!window.lastReport) {
+        alert("Grade an essay first.");
+        return;
+      }
+
+      const r = window.lastReport;
+      const content = `BladeMark™ GCSE English Literature
+
+Text:
+${r.textTitle || "Not entered"}
+
+Type:
+${r.textType}
+
+Question:
+${r.question || "Not entered"}
+
+Overall Mark:
+${r.mark30}/30
+
+Level:
+${r.level}
+
+AO1:
+${r.ao1Mark}/12
+
+AO2:
+${r.ao2Mark}/12
+
+AO3:
+${r.ao3Mark}/6
+
+AO4:
+${r.ao4Mark}/4
+
+Overview:
+${r.overview}
+
+Strengths:
+${r.strengths.map(x => "- " + x).join("\n")}
+
+Targets:
+${r.targets.map(x => "- " + x).join("\n")}
+
+Rewrite Advice:
+${r.rewriteAdvice}
+`;
+
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "blademark-gcse-literature-report.txt";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
